@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:unithub/screens/tabs/bookings/bookings_tab.dart';
-import 'package:unithub/screens/tabs/events/events_tab.dart';
-import 'package:unithub/screens/tabs/home/home_tab.dart';
-import 'package:unithub/screens/tabs/messages/messages_tab.dart';
+import 'package:unithub/page/tabs/bookings/bookings_tab.dart';
+import 'package:unithub/page/tabs/events/events_tab.dart';
+import 'package:unithub/page/tabs/home/home_tab.dart';
+import 'package:unithub/page/tabs/messages/messages_tab.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unithub/screens/tabs/home/widgets/home_search_bar.dart';
+import 'package:unithub/page/tabs/home/widgets/home_search_bar.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
