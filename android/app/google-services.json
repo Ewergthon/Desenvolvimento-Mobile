@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "363523496259",
+    "project_id": "unithub-5063b",
+    "storage_bucket": "unithub-5063b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363523496259:android:6ab11d6795804b7f0b77f6",
+        "android_client_info": {
+          "package_name": "com.example.unithub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF_Ts2bDAgAf_JaCIEirYxPvj3P49pc8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
