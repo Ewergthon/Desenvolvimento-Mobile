@@ -4,8 +4,9 @@ class DropdownCategory extends StatefulWidget {
 
   final List<String> categories;
   String? selectedCategory;
+  final Function(String?) onCategoryChanged;
 
-  DropdownCategory({super.key, required this.categories, this.selectedCategory});
+  DropdownCategory({super.key, required this.categories, this.selectedCategory, required this.onCategoryChanged});
 
   @override
   State<DropdownCategory> createState() => _DropdownCategoryState();
@@ -60,11 +61,7 @@ class _DropdownCategoryState extends State<DropdownCategory> {
           child: Text(c),
         );
       }).toList(),
-      onChanged: (newValue) {
-        setState(() {
-          widget.selectedCategory= newValue;
-        });
-      },
+      onChanged: widget.onCategoryChanged,
     );
   }
 }

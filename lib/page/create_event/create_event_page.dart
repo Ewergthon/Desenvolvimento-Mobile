@@ -18,6 +18,7 @@ import 'package:unithub/page/components/success_toast.dart';
 import 'package:unithub/page/create_event/cubit/create_event_cubit.dart';
 import 'package:unithub/page/create_event/cubit/create_event_state.dart';
 import 'package:unithub/page/create_event/widgets/balloon_event.dart';
+import 'package:unithub/page/create_event/widgets/confirm_dialog.dart';
 import 'package:unithub/page/create_event/widgets/dropdown_category.dart';
 import 'package:unithub/page/create_event/widgets/required_field.dart';
 
@@ -101,8 +102,8 @@ class _CreateEventPageState extends State<CreateEventPage> {
               },
               success: () {
                 showToastSuccess(context);
-                // TODO: POPUP DE CONFIRMAÇÃO
-                context.pushReplacementNamed(AppRoutes.navBar);
+                context.pushNamedAndRemoveUntil(AppRoutes.navBar);
+                showConfirmDialog(context);
               },
             );
           },
@@ -263,7 +264,15 @@ class _CreateEventPageState extends State<CreateEventPage> {
                             ),
                             20.height(),
                             const RequiredField(title: "Categoria"),
-                            DropdownCategory(categories: categories, selectedCategory: selectedCategory),
+                            DropdownCategory(
+                              categories: categories, 
+                              selectedCategory: selectedCategory,
+                              onCategoryChanged: (newValue) {
+                                setState(() {
+                                  selectedCategory= newValue;
+                                });
+                              },
+                            ),
                             20.height(),
                             const RequiredField(title: "Local a ser alocado"),
                             AppTextField(
@@ -276,7 +285,14 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               },
                               sufixIcon: const Icon(Icons.location_on_outlined, size: 32, color: Color(0xFF0880AE)),
                             ),
-                            BalloonEvent(showBalloon: showBalloon),
+                            BalloonEvent(
+                              showBalloon: showBalloon,
+                                    onPressed: () {
+                              setState(() {
+                                showBalloon = !showBalloon!;
+                              });
+                            },
+                            ),
                             20.height(),
                             const Text(
                               "Descrição do Evento",

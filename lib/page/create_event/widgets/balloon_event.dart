@@ -6,10 +6,12 @@ import 'package:unithub/core/extensions/screen_size_extension.dart';
 class BalloonEvent extends StatefulWidget {
 
   bool? showBalloon;
+  final Function()? onPressed;
 
   BalloonEvent({
     super.key,
     this.showBalloon,
+    required this.onPressed,
   });
 
   @override
@@ -54,11 +56,7 @@ class _BalloonEventState extends State<BalloonEvent> {
                   Expanded(
                     flex: 1,
                     child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          widget.showBalloon = !widget.showBalloon!;
-                        });
-                      },
+                      onPressed: widget.onPressed,
                       icon: const Icon(Icons.close),
                     ),
                   ),

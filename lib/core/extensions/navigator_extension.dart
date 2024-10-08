@@ -33,4 +33,12 @@ extension NavigatorExtension on BuildContext {
       route,
     );
   }
+
+  void pushNamedAndRemoveUntil(String route) {
+    Navigator.pushNamedAndRemoveUntil(
+      this, 
+      route,
+      (route) => false,
+    );
+  }
 }
