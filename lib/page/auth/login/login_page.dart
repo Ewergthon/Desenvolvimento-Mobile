@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toastification/toastification.dart';
-import 'package:unithub/components/app_text_field.dart';
+import 'package:unithub/page/components/app_text_field.dart';
 import 'package:unithub/core/di/setup_injections.dart';
 import 'package:unithub/core/extensions/navigator_extension.dart';
 import 'package:unithub/core/extensions/screen_size_extension.dart';

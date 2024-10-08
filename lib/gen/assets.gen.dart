@@ -22,6 +22,7 @@ class Assets {
       AssetGenImage('assets/google_login.png');
   static const String googleLoginSvg = 'assets/google_login.svg';
   static const AssetGenImage home = AssetGenImage('assets/home.png');
+  static const String logoBlue = 'assets/logo_blue.svg';
   static const AssetGenImage messages = AssetGenImage('assets/messages.png');
   static const AssetGenImage profile = AssetGenImage('assets/profile.jpg');
   static const String unithubYellow = 'assets/unithub_yellow.svg';
@@ -36,6 +37,7 @@ class Assets {
         googleLoginPng,
         googleLoginSvg,
         home,
+        logoBlue,
         messages,
         profile,
         unithubYellow

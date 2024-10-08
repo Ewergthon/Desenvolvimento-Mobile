@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:unithub/core/extensions/sizedbox_extension.dart';
+import 'package:unithub/gen/assets.gen.dart';
 import 'package:unithub/page/tabs/home/widgets/home_search_bar.dart';
 
 class HomeTab extends StatefulWidget {
@@ -9,7 +12,6 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  // Lista de imagens e títulos
   final List<Map<String, String>> events = [
     {"image": "assets/event.png", "title": "70% OFF - Table Tennis contest.\nBook Fast."},
     {"image": "assets/event.png", "title": "70% OFF - Table Tennis contest.\nBook Fast."},
@@ -23,9 +25,15 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Home',
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        title: Row(
+          children: [
+            SvgPicture.asset(Assets.logoBlue),
+            20.width(),
+            const Text(
+              'Home',
+              style: TextStyle(fontSize: 34, fontWeight: FontWeight.w700),
+            ),
+          ],
         ),
         actions: const [
           Padding(
@@ -44,8 +52,8 @@ class _HomeTabState extends State<HomeTab> {
           const Padding(
             padding: EdgeInsets.all(16),
             child: Text(
-              "What's happening",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              "Esta semana",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ),
           ),
           Expanded(
@@ -67,7 +75,7 @@ class _HomeTabState extends State<HomeTab> {
                       children: [
                         Image.asset( events[index]["image"]!),
                         const SizedBox(height: 10),
-                        Text(events[index]["title"] ?? "", style: const TextStyle(fontSize: 20)),
+                        Text(events[index]["title"] ?? "", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
                         Align(
                           alignment: Alignment.centerRight,
                           child: SizedBox(
@@ -79,7 +87,7 @@ class _HomeTabState extends State<HomeTab> {
                               onPressed: (){}, 
                               child: const Text(
                                 "Read more", 
-                                style: TextStyle(color: Colors.blue, fontSize: 16, fontWeight: FontWeight.w400),
+                                style: TextStyle(color: Colors.blue, fontSize: 15, fontWeight: FontWeight.w300),
                               ),
                             ),
                           ),

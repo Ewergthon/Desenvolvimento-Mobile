@@ -32,13 +32,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
       body: _tabs[_currentIndex],
       bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+        borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
         child: Container(
           decoration: const BoxDecoration(
             border: Border.fromBorderSide(BorderSide(color: Colors.black26, width: 2)),
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
           child: BottomNavigationBar(
+            backgroundColor: const Color(0xFF005EAB),
             elevation: 10,
             type: BottomNavigationBarType.fixed,
             currentIndex: _currentIndex,
@@ -67,17 +68,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                height: 4,
-                width: _currentIndex == index ? 30 : 0,
+                height: 8,
+                width: _currentIndex == index ? 53 : 0,
                 decoration: BoxDecoration(
-                  color: _currentIndex == index ? Colors.blue : Colors.transparent,
-                  borderRadius: BorderRadius.circular(2),
+                  color: _currentIndex == index ? const Color(0xFF74E8E8) : Colors.transparent,
+                  borderRadius: BorderRadius.circular(5),
                 ),
               ),
               Image.asset(
                 image,
-                height: 30,
-                width: 30,
+                height: 45,
+                width: 42,
               ),
             ],
           ),

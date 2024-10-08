@@ -1,12 +1,15 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unithub/data/repository/auth/login_repository.dart';
 import 'package:unithub/data/repository/auth/register_repository.dart';
+import 'package:unithub/data/repository/event/event_repository.dart';
 import 'package:unithub/page/auth/login/cubit/login_cubit.dart';
 import 'package:unithub/page/auth/register/cubit/register_cubit.dart';
+import 'package:unithub/page/create_event/cubit/create_event_cubit.dart';
 import 'package:unithub/services/shared_preferences_service.dart';
 
 GetIt i = GetIt.instance;
@@ -15,6 +18,7 @@ Future<void> setUpInjections() async {
 
   final FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
 
   final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
@@ -23,6 +27,8 @@ Future<void> setUpInjections() async {
   registerI(auth, firestore);
 
   loginI(auth, firestore);
+
+  eventI(firestore, storage);
 }
 
 void registerI(FirebaseAuth auth, FirebaseFirestore firestore) {
@@ -44,4 +50,10 @@ void loginI(FirebaseAuth auth, FirebaseFirestore firestore) {
   );
 
   i.registerFactory(() => LoginCubit(repository: i<LoginRepository>()));
+}
+
+void eventI(FirebaseFirestore firestore, FirebaseStorage storage) {
+  i.registerLazySingleton(() => EventRepository(firestore: firestore, storage: storage));
+
+  i.registerFactory(() => CreateEventCubit(repository: i<EventRepository>()));
 }
