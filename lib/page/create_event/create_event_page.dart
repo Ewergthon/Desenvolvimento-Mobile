@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:balloon_widget/balloon_widget.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:toastification/toastification.dart';
 import 'package:unithub/core/di/setup_injections.dart';
 import 'package:unithub/core/extensions/navigator_extension.dart';
 import 'package:unithub/core/extensions/screen_size_extension.dart';
@@ -15,8 +13,13 @@ import 'package:unithub/core/extensions/widget_position_extension.dart';
 import 'package:unithub/core/routes/app_routes.dart';
 import 'package:unithub/data/dto/event/event_dto.dart';
 import 'package:unithub/page/components/app_text_field.dart';
+import 'package:unithub/page/components/error_toast.dart';
+import 'package:unithub/page/components/success_toast.dart';
 import 'package:unithub/page/create_event/cubit/create_event_cubit.dart';
 import 'package:unithub/page/create_event/cubit/create_event_state.dart';
+import 'package:unithub/page/create_event/widgets/balloon_event.dart';
+import 'package:unithub/page/create_event/widgets/dropdown_category.dart';
+import 'package:unithub/page/create_event/widgets/required_field.dart';
 
 class CreateEventPage extends StatefulWidget {
   const CreateEventPage({super.key});
@@ -81,15 +84,12 @@ class _CreateEventPageState extends State<CreateEventPage> {
             children: [
               IconButton(
                 onPressed: () => context.pop(),
-                icon:
-                    const Icon(Icons.arrow_back_ios, color: Color(0xFF007AFF)),
+                icon: const Icon(Icons.arrow_back_ios, color: Color(0xFF007AFF)),
               ),
-              const Text("Eventos",
-                  style: TextStyle(color: Color(0xFF007AFF), fontSize: 17)),
+              const Text("Eventos", style: TextStyle(color: Color(0xFF007AFF), fontSize: 17)),
             ],
           ),
-          title: const Text('Criar evento',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
+          title: const Text('Criar evento', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
         ),
         body: BlocConsumer<CreateEventCubit, CreateEventState>(
           bloc: cubit,
@@ -97,45 +97,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
             cubit.state.maybeWhen(
               orElse: () {},
               error: (exception, stackTrace, shouldPopPage) {
-                toastification.show(
-                  alignment: Alignment.bottomCenter,
-                  context: context,
-                  autoCloseDuration: const Duration(seconds: 3),
-                  showProgressBar: false,
-                  borderSide: const BorderSide(color: Colors.transparent),
-                  type: ToastificationType.error,
-                  backgroundColor: Colors.red,
-                  applyBlurEffect: true,
-                  style: ToastificationStyle.simple,
-                  showIcon: false,
-                  borderRadius: BorderRadius.circular(20),
-                  closeButtonShowType: CloseButtonShowType.none,
-                  title: Text(
-                    exception.toString(), 
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                    overflow: TextOverflow.ellipsis,
-                  ).centralized(),
-                );
+                showToastError(exception, context);
               },
               success: () {
-                toastification.show(
-                  alignment: Alignment.bottomCenter,
-                  context: context,
-                  autoCloseDuration: const Duration(seconds: 3),
-                  showProgressBar: false,
-                  type: ToastificationType.success,
-                  applyBlurEffect: true,
-                  style: ToastificationStyle.simple,
-                  borderSide: const BorderSide(color: Colors.transparent),
-                  backgroundColor: Colors.green,
-                  borderRadius: BorderRadius.circular(20),
-                  closeButtonShowType: CloseButtonShowType.none,
-                  title: const Text(
-                    "Evento criado com sucesso!", 
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                    overflow: TextOverflow.ellipsis,
-                  ).centralized(),
-                );
+                showToastSuccess(context);
                 // TODO: POPUP DE CONFIRMAÇÃO
                 context.pushReplacementNamed(AppRoutes.navBar);
               },
@@ -160,18 +125,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(text: "CPF"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
+                            const RequiredField(title: "CPF"),
                             AppTextField(
                               controller: _cpfC,
                               hintText: "000.000.000-00",
@@ -188,18 +142,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               ],
                             ),
                             20.height(),
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(text: "Nome do(a) Palestrante"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
+                            const RequiredField(title: "Nome do(a) palestrante"),
                             AppTextField(
                               controller: _nameC,
                               validator: (v) {
@@ -211,20 +154,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               inputType: TextInputType.name,
                             ),
                             20.height(),
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(
-                                      text:
-                                          "Matrícula (responsável ou terceiro)"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
+                            const RequiredField(title: "Matrícula (responsável ou terceiro)"),
                             AppTextField(
                               controller: _registrationC,
                               validator: (v) {
@@ -236,18 +166,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               inputType: TextInputType.number,
                             ),
                             20.height(),
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(text: "Nome do Evento"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
+                            const RequiredField(title: "Nome do evento"),
                             AppTextField(
                               controller: _eventNameC,
                               validator: (v) {
@@ -259,18 +178,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               inputType: TextInputType.name,
                             ),
                             20.height(),
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(text: "Data do Evento"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
+                            const RequiredField(title: "Data do evento"),
                             AppTextField(
                               controller: _eventDateC,
                               validator: (v) {
@@ -292,18 +200,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               ),
                             ),
                             20.height(),
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(text: "Hora"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
+                            const RequiredField(title: "Hora"),
                             10.width(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -311,10 +208,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text("De",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400)),
+                                    const Text(
+                                      "De", 
+                                      style: TextStyle(  fontSize: 16, fontWeight: FontWeight.w400),
+                                    ),
                                     SizedBox(
                                       width: context.getWidth() * 0.3,
                                       child: AppTextField(
@@ -328,8 +225,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                         hintText: "mm:hh",
                                         inputType: TextInputType.number,
                                         inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
+                                          FilteringTextInputFormatter.digitsOnly,
                                           HoraInputFormatter(),
                                         ],
                                       ),
@@ -339,10 +235,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text("Até",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400)),
+                                    const Text(
+                                      "Até",
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                                    ),
                                     SizedBox(
                                       width: context.getWidth() * 0.3,
                                       child: AppTextField(
@@ -356,8 +252,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                         hintText: "mm:hh",
                                         inputType: TextInputType.number,
                                         inputFormatters: [
-                                          FilteringTextInputFormatter
-                                              .digitsOnly,
+                                          FilteringTextInputFormatter.digitsOnly,
                                           HoraInputFormatter(),
                                         ],
                                       ),
@@ -367,87 +262,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               ],
                             ),
                             20.height(),
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(text: "Categoria"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
-                            DropdownButtonFormField(
-                              validator: (v) {
-                                if (v == null) {
-                                  return "Este campo precisa ser preenchido.";
-                                }
-                                return null;
-                              },
-                              icon: const Icon(
-                                  Icons.keyboard_arrow_down_outlined,
-                                  size: 30,
-                                  color: Color(0xFF0880AE)),
-                              decoration: InputDecoration(
-                                hintText: "Selecione uma categoria",
-                                contentPadding: const EdgeInsets.all(8),
-                                filled: true,
-                                fillColor: Colors.white,
-                                hintStyle:
-                                    const TextStyle(color: Colors.black26),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.black26)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.black26)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.black26)),
-                                disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.black26)),
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.redAccent)),
-                                errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                        color: Colors.redAccent)),
-                              ),
-                              value: selectedCategory,
-                              items: categories.map((c) {
-                                return DropdownMenuItem<String>(
-                                  value: c,
-                                  child: Text(c),
-                                );
-                              }).toList(),
-                              onChanged: (newValue) {
-                                setState(() {
-                                  selectedCategory = newValue;
-                                });
-                              },
-                            ),
+                            const RequiredField(title: "Categoria"),
+                            DropdownCategory(categories: categories, selectedCategory: selectedCategory),
                             20.height(),
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(text: "Local a ser alocado"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
+                            const RequiredField(title: "Local a ser alocado"),
                             AppTextField(
                               controller: _eventLocal,
                               validator: (v) {
@@ -456,63 +274,13 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                 }
                                 return null;
                               },
-                              sufixIcon: const Icon(Icons.location_on_outlined,
-                                  size: 32, color: Color(0xFF0880AE)),
+                              sufixIcon: const Icon(Icons.location_on_outlined, size: 32, color: Color(0xFF0880AE)),
                             ),
-                            Visibility(
-                              visible: showBalloon,
-                              child: Balloon(
-                                color: const Color(0xFFFFD2D2),
-                                nipPosition: BalloonNipPosition.topRight,
-                                child: SizedBox(
-                                  width: context.getWidth(),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        const Expanded(
-                                          flex: 5,
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "Verificar disponibilade nesse horário",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                              Text(
-                                                "Para criar um evento incrível precisamos primeiro verificar a sua disponibilidade.",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                showBalloon = !showBalloon;
-                                              });
-                                            },
-                                            icon: const Icon(Icons.close),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            BalloonEvent(showBalloon: showBalloon),
                             20.height(),
                             const Text(
                               "Descrição do Evento",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                             ),
                             AppTextField(
                               controller: _descriptionC,
@@ -521,24 +289,14 @@ class _CreateEventPageState extends State<CreateEventPage> {
                               inputType: TextInputType.multiline,
                             ),
                             20.height(),
-                            const Text.rich(
-                              TextSpan(
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                children: [
-                                  TextSpan(text: "Público"),
-                                  TextSpan(
-                                      text: "*",
-                                      style: TextStyle(color: Colors.red)),
-                                ],
-                              ),
-                            ),
+                            const RequiredField(title: "Público"),
                             RadioListTile<String>(
                               contentPadding: EdgeInsets.zero,
                               activeColor: const Color(0xFF007AFF),
-                              title: Text(public[0],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
+                              title: Text(
+                                public[0],
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
                               value: public[0],
                               groupValue: selectedPublic,
                               onChanged: (value) {
@@ -550,9 +308,10 @@ class _CreateEventPageState extends State<CreateEventPage> {
                             RadioListTile<String>(
                               contentPadding: EdgeInsets.zero,
                               activeColor: const Color(0xFF007AFF),
-                              title: Text(public[1],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
+                              title: Text(
+                                public[1],
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
                               value: public[1],
                               groupValue: selectedPublic,
                               onChanged: (value) {
@@ -564,8 +323,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                             20.height(),
                             const Text(
                               "Mídia",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                             ),
                             _selectedImage != null
                                 ? Stack(
@@ -598,25 +356,28 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                     ],
                                   )
                                 : InkWell(
-                                    onTap: () =>
-                                        _pickImage(ImageSource.gallery),
+                                    onTap: () => _pickImage(ImageSource.gallery),
                                     child: const Card(
                                       color: Colors.white,
                                       elevation: 6,
                                       shadowColor: Color(0xFF007AFF),
                                       child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 20, horizontal: 60),
+                                        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
                                         child: Column(
                                           children: [
-                                            Icon(Icons.camera_alt_outlined,
-                                                size: 40,
-                                                color: Color(0xFF007AFF)),
-                                            Text("Foto",
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Color(0xFF007AFF))),
+                                            Icon(
+                                              Icons.camera_alt_outlined,
+                                              size: 40,
+                                              color: Color(0xFF007AFF),
+                                            ),
+                                            Text(
+                                              "Foto",
+                                              style: TextStyle(
+                                                fontSize: 16, 
+                                                fontWeight: FontWeight.w600, 
+                                                color: Color(0xFF007AFF),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -624,44 +385,42 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                   ),
                             20.height(),
                             ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.all(12),
-                                      elevation: 4,
-                                      backgroundColor: const Color(0xFFFDBC14),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(11)),
-                                    ),
-                                    onPressed: () async {
-                                      if (formKey.currentState?.validate() ??
-                                          false) {
-                                            EventDto dto = EventDto(
-                                              cpf: _cpfC.text,
-                                              name: _nameC.text,
-                                              registration: _registrationC.text,
-                                              eventName: _eventNameC.text,
-                                              eventDate: _eventDateC.text,
-                                              eventStartTime: _startTimeC.text,
-                                              eventEndTime: _endTimeC.text,
-                                              category: selectedCategory ?? "",
-                                              localEvent: _eventLocal.text,
-                                              description: _descriptionC.text,
-                                              public: selectedPublic ?? "Interno",
-                                            );
-
-                                            cubit.createEvent(dto, _selectedImage);
-                                          }
-                                    },
-                                    child: state is LoadingCreateEventState
-                                    ? const CircularProgressIndicator(color: Colors.white)
-                                    : const Text(
-                                      "Confirmar",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400),
-                                    ).centralized())
-                                .centralized(),
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(12),
+                                elevation: 4,
+                                backgroundColor: const Color(0xFFFDBC14),
+                                shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(11),
+                                ),
+                              ),
+                              onPressed: () async {
+                                if (formKey.currentState?.validate() ?? false) {
+                                  EventDto dto = EventDto(
+                                    cpf: _cpfC.text,
+                                    name: _nameC.text,
+                                    registration: _registrationC.text,
+                                    eventName: _eventNameC.text,
+                                    eventDate: _eventDateC.text,
+                                    eventStartTime: _startTimeC.text,
+                                    eventEndTime: _endTimeC.text,
+                                    category: selectedCategory ?? "",
+                                    localEvent: _eventLocal.text,
+                                    description: _descriptionC.text,
+                                    public: selectedPublic ?? "Interno",
+                                  );
+                                  cubit.createEvent(dto, _selectedImage);
+                                }
+                              },
+                              child: state is LoadingCreateEventState
+                              ? const CircularProgressIndicator(color: Colors.white)
+                              : const Text(
+                                "Confirmar",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ).centralized(),
+                            ).centralized(),
                           ],
                         ),
                       ),
