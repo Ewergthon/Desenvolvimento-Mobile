@@ -22,6 +22,10 @@ EventDto _$EventDtoFromJson(Map<String, dynamic> json) {
 mixin _$EventDto {
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'participants')
+  List<UserDto> get participants => throw _privateConstructorUsedError;
+  @JsonKey(name: 'limit')
+  int get limit => throw _privateConstructorUsedError;
   @JsonKey(name: 'cpf')
   String get cpf => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
@@ -31,11 +35,14 @@ mixin _$EventDto {
   @JsonKey(name: 'event_name')
   String get eventName => throw _privateConstructorUsedError;
   @JsonKey(name: 'event_date')
-  String get eventDate => throw _privateConstructorUsedError;
+  @TimestampOrNullConverter()
+  DateTime? get eventDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'event_start_time')
-  String get eventStartTime => throw _privateConstructorUsedError;
+  @TimestampOrNullConverter()
+  DateTime? get eventStartTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'event_end_time')
-  String get eventEndTime => throw _privateConstructorUsedError;
+  @TimestampOrNullConverter()
+  DateTime? get eventEndTime => throw _privateConstructorUsedError;
   @JsonKey(name: 'category')
   String get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'local_event')
@@ -46,6 +53,9 @@ mixin _$EventDto {
   String get public => throw _privateConstructorUsedError;
   @JsonKey(name: 'media_event')
   String get mediaEvent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  @TimestampOrNullConverter()
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,18 +70,29 @@ abstract class $EventDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'participants') List<UserDto> participants,
+      @JsonKey(name: 'limit') int limit,
       @JsonKey(name: 'cpf') String cpf,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'registration') String registration,
       @JsonKey(name: 'event_name') String eventName,
-      @JsonKey(name: 'event_date') String eventDate,
-      @JsonKey(name: 'event_start_time') String eventStartTime,
-      @JsonKey(name: 'event_end_time') String eventEndTime,
+      @JsonKey(name: 'event_date')
+      @TimestampOrNullConverter()
+      DateTime? eventDate,
+      @JsonKey(name: 'event_start_time')
+      @TimestampOrNullConverter()
+      DateTime? eventStartTime,
+      @JsonKey(name: 'event_end_time')
+      @TimestampOrNullConverter()
+      DateTime? eventEndTime,
       @JsonKey(name: 'category') String category,
       @JsonKey(name: 'local_event') String localEvent,
       @JsonKey(name: 'description') String description,
       @JsonKey(name: 'public') String public,
-      @JsonKey(name: 'media_event') String mediaEvent});
+      @JsonKey(name: 'media_event') String mediaEvent,
+      @JsonKey(name: 'created_at')
+      @TimestampOrNullConverter()
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -88,24 +109,35 @@ class _$EventDtoCopyWithImpl<$Res, $Val extends EventDto>
   @override
   $Res call({
     Object? id = null,
+    Object? participants = null,
+    Object? limit = null,
     Object? cpf = null,
     Object? name = null,
     Object? registration = null,
     Object? eventName = null,
-    Object? eventDate = null,
-    Object? eventStartTime = null,
-    Object? eventEndTime = null,
+    Object? eventDate = freezed,
+    Object? eventStartTime = freezed,
+    Object? eventEndTime = freezed,
     Object? category = null,
     Object? localEvent = null,
     Object? description = null,
     Object? public = null,
     Object? mediaEvent = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      participants: null == participants
+          ? _value.participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<UserDto>,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
       cpf: null == cpf
           ? _value.cpf
           : cpf // ignore: cast_nullable_to_non_nullable
@@ -122,18 +154,18 @@ class _$EventDtoCopyWithImpl<$Res, $Val extends EventDto>
           ? _value.eventName
           : eventName // ignore: cast_nullable_to_non_nullable
               as String,
-      eventDate: null == eventDate
+      eventDate: freezed == eventDate
           ? _value.eventDate
           : eventDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      eventStartTime: null == eventStartTime
+              as DateTime?,
+      eventStartTime: freezed == eventStartTime
           ? _value.eventStartTime
           : eventStartTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      eventEndTime: null == eventEndTime
+              as DateTime?,
+      eventEndTime: freezed == eventEndTime
           ? _value.eventEndTime
           : eventEndTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -154,6 +186,10 @@ class _$EventDtoCopyWithImpl<$Res, $Val extends EventDto>
           ? _value.mediaEvent
           : mediaEvent // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -168,18 +204,29 @@ abstract class _$$EventDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'participants') List<UserDto> participants,
+      @JsonKey(name: 'limit') int limit,
       @JsonKey(name: 'cpf') String cpf,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'registration') String registration,
       @JsonKey(name: 'event_name') String eventName,
-      @JsonKey(name: 'event_date') String eventDate,
-      @JsonKey(name: 'event_start_time') String eventStartTime,
-      @JsonKey(name: 'event_end_time') String eventEndTime,
+      @JsonKey(name: 'event_date')
+      @TimestampOrNullConverter()
+      DateTime? eventDate,
+      @JsonKey(name: 'event_start_time')
+      @TimestampOrNullConverter()
+      DateTime? eventStartTime,
+      @JsonKey(name: 'event_end_time')
+      @TimestampOrNullConverter()
+      DateTime? eventEndTime,
       @JsonKey(name: 'category') String category,
       @JsonKey(name: 'local_event') String localEvent,
       @JsonKey(name: 'description') String description,
       @JsonKey(name: 'public') String public,
-      @JsonKey(name: 'media_event') String mediaEvent});
+      @JsonKey(name: 'media_event') String mediaEvent,
+      @JsonKey(name: 'created_at')
+      @TimestampOrNullConverter()
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -194,24 +241,35 @@ class __$$EventDtoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? participants = null,
+    Object? limit = null,
     Object? cpf = null,
     Object? name = null,
     Object? registration = null,
     Object? eventName = null,
-    Object? eventDate = null,
-    Object? eventStartTime = null,
-    Object? eventEndTime = null,
+    Object? eventDate = freezed,
+    Object? eventStartTime = freezed,
+    Object? eventEndTime = freezed,
     Object? category = null,
     Object? localEvent = null,
     Object? description = null,
     Object? public = null,
     Object? mediaEvent = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_$EventDtoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      participants: null == participants
+          ? _value._participants
+          : participants // ignore: cast_nullable_to_non_nullable
+              as List<UserDto>,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
       cpf: null == cpf
           ? _value.cpf
           : cpf // ignore: cast_nullable_to_non_nullable
@@ -228,18 +286,18 @@ class __$$EventDtoImplCopyWithImpl<$Res>
           ? _value.eventName
           : eventName // ignore: cast_nullable_to_non_nullable
               as String,
-      eventDate: null == eventDate
+      eventDate: freezed == eventDate
           ? _value.eventDate
           : eventDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      eventStartTime: null == eventStartTime
+              as DateTime?,
+      eventStartTime: freezed == eventStartTime
           ? _value.eventStartTime
           : eventStartTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      eventEndTime: null == eventEndTime
+              as DateTime?,
+      eventEndTime: freezed == eventEndTime
           ? _value.eventEndTime
           : eventEndTime // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime?,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -260,6 +318,10 @@ class __$$EventDtoImplCopyWithImpl<$Res>
           ? _value.mediaEvent
           : mediaEvent // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -270,18 +332,27 @@ class __$$EventDtoImplCopyWithImpl<$Res>
 class _$EventDtoImpl implements _EventDto {
   _$EventDtoImpl(
       {@JsonKey(name: 'id') this.id = '',
+      @JsonKey(name: 'participants')
+      final List<UserDto> participants = const [],
+      @JsonKey(name: 'limit') this.limit = 0,
       @JsonKey(name: 'cpf') this.cpf = '',
       @JsonKey(name: 'name') this.name = '',
       @JsonKey(name: 'registration') this.registration = '',
       @JsonKey(name: 'event_name') this.eventName = '',
-      @JsonKey(name: 'event_date') this.eventDate = '',
-      @JsonKey(name: 'event_start_time') this.eventStartTime = '',
-      @JsonKey(name: 'event_end_time') this.eventEndTime = '',
+      @JsonKey(name: 'event_date') @TimestampOrNullConverter() this.eventDate,
+      @JsonKey(name: 'event_start_time')
+      @TimestampOrNullConverter()
+      this.eventStartTime,
+      @JsonKey(name: 'event_end_time')
+      @TimestampOrNullConverter()
+      this.eventEndTime,
       @JsonKey(name: 'category') this.category = '',
       @JsonKey(name: 'local_event') this.localEvent = '',
       @JsonKey(name: 'description') this.description = '',
       @JsonKey(name: 'public') this.public = '',
-      @JsonKey(name: 'media_event') this.mediaEvent = ''});
+      @JsonKey(name: 'media_event') this.mediaEvent = '',
+      @JsonKey(name: 'created_at') @TimestampOrNullConverter() this.createdAt})
+      : _participants = participants;
 
   factory _$EventDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$EventDtoImplFromJson(json);
@@ -289,6 +360,18 @@ class _$EventDtoImpl implements _EventDto {
   @override
   @JsonKey(name: 'id')
   final String id;
+  final List<UserDto> _participants;
+  @override
+  @JsonKey(name: 'participants')
+  List<UserDto> get participants {
+    if (_participants is EqualUnmodifiableListView) return _participants;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_participants);
+  }
+
+  @override
+  @JsonKey(name: 'limit')
+  final int limit;
   @override
   @JsonKey(name: 'cpf')
   final String cpf;
@@ -303,13 +386,16 @@ class _$EventDtoImpl implements _EventDto {
   final String eventName;
   @override
   @JsonKey(name: 'event_date')
-  final String eventDate;
+  @TimestampOrNullConverter()
+  final DateTime? eventDate;
   @override
   @JsonKey(name: 'event_start_time')
-  final String eventStartTime;
+  @TimestampOrNullConverter()
+  final DateTime? eventStartTime;
   @override
   @JsonKey(name: 'event_end_time')
-  final String eventEndTime;
+  @TimestampOrNullConverter()
+  final DateTime? eventEndTime;
   @override
   @JsonKey(name: 'category')
   final String category;
@@ -325,10 +411,14 @@ class _$EventDtoImpl implements _EventDto {
   @override
   @JsonKey(name: 'media_event')
   final String mediaEvent;
+  @override
+  @JsonKey(name: 'created_at')
+  @TimestampOrNullConverter()
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'EventDto(id: $id, cpf: $cpf, name: $name, registration: $registration, eventName: $eventName, eventDate: $eventDate, eventStartTime: $eventStartTime, eventEndTime: $eventEndTime, category: $category, localEvent: $localEvent, description: $description, public: $public, mediaEvent: $mediaEvent)';
+    return 'EventDto(id: $id, participants: $participants, limit: $limit, cpf: $cpf, name: $name, registration: $registration, eventName: $eventName, eventDate: $eventDate, eventStartTime: $eventStartTime, eventEndTime: $eventEndTime, category: $category, localEvent: $localEvent, description: $description, public: $public, mediaEvent: $mediaEvent, createdAt: $createdAt)';
   }
 
   @override
@@ -337,6 +427,9 @@ class _$EventDtoImpl implements _EventDto {
         (other.runtimeType == runtimeType &&
             other is _$EventDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality()
+                .equals(other._participants, _participants) &&
+            (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.cpf, cpf) || other.cpf == cpf) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.registration, registration) ||
@@ -357,7 +450,9 @@ class _$EventDtoImpl implements _EventDto {
                 other.description == description) &&
             (identical(other.public, public) || other.public == public) &&
             (identical(other.mediaEvent, mediaEvent) ||
-                other.mediaEvent == mediaEvent));
+                other.mediaEvent == mediaEvent) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
@@ -365,6 +460,8 @@ class _$EventDtoImpl implements _EventDto {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      const DeepCollectionEquality().hash(_participants),
+      limit,
       cpf,
       name,
       registration,
@@ -376,7 +473,8 @@ class _$EventDtoImpl implements _EventDto {
       localEvent,
       description,
       public,
-      mediaEvent);
+      mediaEvent,
+      createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -395,18 +493,29 @@ class _$EventDtoImpl implements _EventDto {
 abstract class _EventDto implements EventDto {
   factory _EventDto(
       {@JsonKey(name: 'id') final String id,
+      @JsonKey(name: 'participants') final List<UserDto> participants,
+      @JsonKey(name: 'limit') final int limit,
       @JsonKey(name: 'cpf') final String cpf,
       @JsonKey(name: 'name') final String name,
       @JsonKey(name: 'registration') final String registration,
       @JsonKey(name: 'event_name') final String eventName,
-      @JsonKey(name: 'event_date') final String eventDate,
-      @JsonKey(name: 'event_start_time') final String eventStartTime,
-      @JsonKey(name: 'event_end_time') final String eventEndTime,
+      @JsonKey(name: 'event_date')
+      @TimestampOrNullConverter()
+      final DateTime? eventDate,
+      @JsonKey(name: 'event_start_time')
+      @TimestampOrNullConverter()
+      final DateTime? eventStartTime,
+      @JsonKey(name: 'event_end_time')
+      @TimestampOrNullConverter()
+      final DateTime? eventEndTime,
       @JsonKey(name: 'category') final String category,
       @JsonKey(name: 'local_event') final String localEvent,
       @JsonKey(name: 'description') final String description,
       @JsonKey(name: 'public') final String public,
-      @JsonKey(name: 'media_event') final String mediaEvent}) = _$EventDtoImpl;
+      @JsonKey(name: 'media_event') final String mediaEvent,
+      @JsonKey(name: 'created_at')
+      @TimestampOrNullConverter()
+      final DateTime? createdAt}) = _$EventDtoImpl;
 
   factory _EventDto.fromJson(Map<String, dynamic> json) =
       _$EventDtoImpl.fromJson;
@@ -414,6 +523,12 @@ abstract class _EventDto implements EventDto {
   @override
   @JsonKey(name: 'id')
   String get id;
+  @override
+  @JsonKey(name: 'participants')
+  List<UserDto> get participants;
+  @override
+  @JsonKey(name: 'limit')
+  int get limit;
   @override
   @JsonKey(name: 'cpf')
   String get cpf;
@@ -428,13 +543,16 @@ abstract class _EventDto implements EventDto {
   String get eventName;
   @override
   @JsonKey(name: 'event_date')
-  String get eventDate;
+  @TimestampOrNullConverter()
+  DateTime? get eventDate;
   @override
   @JsonKey(name: 'event_start_time')
-  String get eventStartTime;
+  @TimestampOrNullConverter()
+  DateTime? get eventStartTime;
   @override
   @JsonKey(name: 'event_end_time')
-  String get eventEndTime;
+  @TimestampOrNullConverter()
+  DateTime? get eventEndTime;
   @override
   @JsonKey(name: 'category')
   String get category;
@@ -450,6 +568,10 @@ abstract class _EventDto implements EventDto {
   @override
   @JsonKey(name: 'media_event')
   String get mediaEvent;
+  @override
+  @JsonKey(name: 'created_at')
+  @TimestampOrNullConverter()
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$EventDtoImplCopyWith<_$EventDtoImpl> get copyWith =>

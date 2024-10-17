@@ -1,7 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:unithub/core/di/setup_injections.dart';
+import 'package:unithub/core/extensions/screen_size_extension.dart';
 import 'package:unithub/core/extensions/sizedbox_extension.dart';
+import 'package:unithub/core/extensions/widget_position_extension.dart';
 import 'package:unithub/gen/assets.gen.dart';
+import 'package:unithub/page/tabs/home/cubit/home_cubit.dart';
+import 'package:unithub/page/tabs/home/cubit/home_state.dart';
+import 'package:unithub/page/tabs/home/widgets/event_dialog.dart';
 import 'package:unithub/page/tabs/home/widgets/home_search_bar.dart';
 
 class HomeTab extends StatefulWidget {
@@ -12,14 +20,13 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  final List<Map<String, String>> events = [
-    {"image": "assets/event.png", "title": "70% OFF - Table Tennis contest.\nBook Fast."},
-    {"image": "assets/event.png", "title": "70% OFF - Table Tennis contest.\nBook Fast."},
-    {"image": "assets/event.png", "title": "70% OFF - Table Tennis contest.\nBook Fast."},
-    {"image": "assets/event.png", "title": "70% OFF - Table Tennis contest.\nBook Fast."},
-    {"image": "assets/event.png", "title": "70% OFF - Table Tennis contest.\nBook Fast."},
-    {"image": "assets/event.png", "title": "70% OFF - Table Tennis contest.\nBook Fast."},
-  ];
+  final cubit = i<HomeCubit>();
+
+  @override
+  void initState() {
+    cubit.getEvents();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,44 +64,87 @@ class _HomeTabState extends State<HomeTab> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: events.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    side: const BorderSide(color: Colors.black26),
-                  ),
-                  color: const Color(0xFFFFF6F6),
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset( events[index]["image"]!),
-                        const SizedBox(height: 10),
-                        Text(events[index]["title"] ?? "", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400)),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: SizedBox(
-                            height: 35,
-                            child: TextButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.all(5),
+            child: BlocBuilder<HomeCubit, HomeState>(
+              bloc: cubit,
+              builder: (context, state) {
+                return state.maybeWhen(
+                  success: (events) => RefreshIndicator(
+                    color: Colors.blue,
+                    displacement: 10,
+                    onRefresh: () async => cubit.getEvents(),
+                    child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    itemCount: events!.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          side: const BorderSide(color: Colors.black26),
+                        ),
+                        color: const Color.fromARGB(255, 255, 243, 237),
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if(events[index].mediaEvent.isNotEmpty) ... [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(14),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CachedNetworkImage(
+                                      imageUrl: events[index].mediaEvent,
+                                      placeholder: (context, url) => const CircularProgressIndicator().centralized(),
+                                      imageBuilder: (context, imageProvider) =>
+                                        Image(
+                                          image: imageProvider,
+                                          height: 148,
+                                          width: context.getWidth(),
+                                          fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              const SizedBox(height: 10),
+                              Text(
+                                events[index].eventName,
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
                               ),
-                              onPressed: (){}, 
-                              child: const Text(
-                                "Read more", 
-                                style: TextStyle(color: Colors.blue, fontSize: 15, fontWeight: FontWeight.w300),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: SizedBox(
+                                  height: 35,
+                                  child: TextButton(
+                                    style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.all(5),
+                                    ),
+                                    onPressed: () => eventDialog(
+                                      context, 
+                                      events[index],
+                                    ),
+                                    child: const Text(
+                                      "Ver Detalhes",
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(0, 122, 255, 1),
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
+                  ),
+                  error: (exception, stackTrace, shouldPopPage) => Text(exception.toString()).centralized(),
+                  loading: () => const CircularProgressIndicator().centralized(),
+                  orElse: () => const SizedBox.shrink(),
                 );
               },
             ),

@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:unithub/core/di/setup_injections.dart';
 import 'package:unithub/core/extensions/navigator_extension.dart';
 import 'package:unithub/core/extensions/screen_size_extension.dart';
 import 'package:unithub/core/extensions/sizedbox_extension.dart';
+import 'package:unithub/core/extensions/string_date_time_extension.dart';
 import 'package:unithub/core/extensions/widget_position_extension.dart';
 import 'package:unithub/core/routes/app_routes.dart';
 import 'package:unithub/data/dto/event/event_dto.dart';
@@ -41,7 +43,6 @@ class _CreateEventPageState extends State<CreateEventPage> {
   final TextEditingController _eventDateC = TextEditingController();
   final TextEditingController _startTimeC = TextEditingController();
   final TextEditingController _endTimeC = TextEditingController();
-  final TextEditingController _endTimelC = TextEditingController();
   final TextEditingController _eventLocal = TextEditingController();
   final TextEditingController _descriptionC = TextEditingController();
 
@@ -74,6 +75,26 @@ class _CreateEventPageState extends State<CreateEventPage> {
     }
   }
 
+  DateTime? convertToDateTime(String time) {
+  final DateFormat formatter = DateFormat('dd/MM/yyyy');
+  try {
+    return formatter.parse(time);
+  } catch (e) {
+    return null;
+  }
+}
+DateTime createTime(DateTime date, String timeString) {
+  final timeParts = timeString.split(':');
+  if (timeParts.length != 2) {
+    throw const FormatException('Horário deve estar no formato hh:mm');
+  }
+
+  final hour = int.parse(timeParts[0]);
+  final minute = int.parse(timeParts[1]);
+
+  return DateTime(date.year, date.month, date.day, hour, minute);
+}
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -101,7 +122,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                 showToastError(exception, context);
               },
               success: () {
-                showToastSuccess(context);
+                showToastSuccess(context, "Evento criado com sucesso!");
                 context.pushNamedAndRemoveUntil(AppRoutes.navBar);
                 showConfirmDialog(context);
               },
@@ -249,7 +270,7 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                           }
                                           return null;
                                         },
-                                        controller: _endTimelC,
+                                        controller: _endTimeC,
                                         hintText: "mm:hh",
                                         inputType: TextInputType.number,
                                         inputFormatters: [
@@ -415,9 +436,9 @@ class _CreateEventPageState extends State<CreateEventPage> {
                                     name: _nameC.text,
                                     registration: _registrationC.text,
                                     eventName: _eventNameC.text,
-                                    eventDate: _eventDateC.text,
-                                    eventStartTime: _startTimeC.text,
-                                    eventEndTime: _endTimeC.text,
+                                    eventDate: convertToDateTime(_eventDateC.text.formatedToBrazilianTime()),
+                                    eventStartTime: createTime(convertToDateTime(_eventDateC.text)!, _startTimeC.text),
+                                    eventEndTime: createTime(convertToDateTime(_eventDateC.text)!, _endTimeC.text),
                                     category: selectedCategory ?? "",
                                     localEvent: _eventLocal.text,
                                     description: _descriptionC.text,
@@ -460,7 +481,6 @@ class _CreateEventPageState extends State<CreateEventPage> {
     _eventDateC.dispose();
     _startTimeC.dispose();
     _endTimeC.dispose();
-    _endTimelC.dispose();
     _eventLocal.dispose();
     _descriptionC.dispose();
     super.dispose();
