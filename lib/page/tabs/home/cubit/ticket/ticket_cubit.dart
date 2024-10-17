@@ -18,6 +18,16 @@ class TicketCubit extends Cubit<TicketState> {
     emit(const TicketState.haveTicket());
   }
 
+  void getMyTicket(String eventId) async {
+    emit(const TicketState.loading());
+    try {
+      final ticket = await repository.getTicketByUidAndEventId(eventId);
+      emit(TicketState.ticketLoaded(ticket: ticket));
+    } catch (e, s) {
+      emit(TicketState.error(exception: e, stackTrace: s, shouldPopPage: true));
+    }
+  }
+
   void createTicket(String uid, String eventId, DateTime expireTime) async {
     emit(const TicketState.loading());
     try {

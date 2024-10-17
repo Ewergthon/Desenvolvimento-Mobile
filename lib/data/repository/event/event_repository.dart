@@ -100,6 +100,21 @@ class EventRepository {
     }
   }
 
+  Future<List<EventDto>> getUserBookedEvents() async {
+    final uid = auth.currentUser!.uid;
+
+    final eventCollection = firestore.collection("events");
+
+    final eventMap = await eventCollection.get();
+
+    List<EventDto> bookedEvents = eventMap.docs
+        .map((doc) => EventDto.fromJson(doc.data()))
+        .where((event) => event.participants.any((participant) => participant.id == uid))
+        .toList();
+
+    return bookedEvents;
+  }
+
   Future<bool> isUserAlreadyBooked(String eventId) async {
     final uid = auth.currentUser!.uid;
 

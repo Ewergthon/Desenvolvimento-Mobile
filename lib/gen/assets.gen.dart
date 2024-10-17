@@ -16,6 +16,9 @@ class Assets {
       AssetGenImage('assets/apple_login.png');
   static const String appleLoginSvg = 'assets/apple_login.svg';
   static const AssetGenImage bookings = AssetGenImage('assets/bookings.png');
+  static const AssetGenImage bookingsHeaderPng =
+      AssetGenImage('assets/bookings_header.png');
+  static const String bookingsHeaderSvg = 'assets/bookings_header.svg';
   static const AssetGenImage event = AssetGenImage('assets/event.png');
   static const AssetGenImage events = AssetGenImage('assets/events.png');
   static const AssetGenImage googleLoginPng =
@@ -32,6 +35,8 @@ class Assets {
         appleLoginPng,
         appleLoginSvg,
         bookings,
+        bookingsHeaderPng,
+        bookingsHeaderSvg,
         event,
         events,
         googleLoginPng,

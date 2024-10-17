@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:unithub/data/dto/ticket/ticket_dto.dart';
 
 part 'ticket_state.freezed.dart';
 
@@ -13,6 +14,8 @@ class TicketState with _$TicketState {
   const factory TicketState.empty() = EmptyTicketState;
 
   const factory TicketState.success() = SuccessTicketState;
+
+  const factory TicketState.ticketLoaded({required TicketDto? ticket}) = LoadedTicketState;
 
   const factory TicketState.deleted() = DeletedTicketState;
 

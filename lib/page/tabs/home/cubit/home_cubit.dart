@@ -31,7 +31,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void removeUserFromEvent(String eventId) async {
+  Future<void> removeUserFromEvent(String eventId) async {
     emit(const HomeState.bookLoading());
     try {
       await repository.removeUserFromEvent(eventId);

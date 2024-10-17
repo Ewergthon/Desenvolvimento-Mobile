@@ -41,6 +41,25 @@ class TicketRepository {
     await ticketCollection.add(ticket.toJson());
   }
 
+  Future<TicketDto?> getTicketByUidAndEventId(String eventId) async {
+
+    final uid = auth.currentUser!.uid;
+
+    final ticketCollection = firestore.collection("tickets");
+
+    final querySnapshot = await ticketCollection
+        .where('uid', isEqualTo: uid)
+        .where('event_id', isEqualTo: eventId)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      final ticketData = querySnapshot.docs.first.data();
+      return TicketDto.fromJson(ticketData);
+    }
+
+    return null;
+  }
+
   Future<void> deleteTicket(String uid, String eventId) async {
     final ticketCollection = firestore.collection("tickets");
 

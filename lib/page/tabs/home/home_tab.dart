@@ -97,12 +97,15 @@ class _HomeTabState extends State<HomeTab> {
                                       imageUrl: events[index].mediaEvent,
                                       placeholder: (context, url) => const CircularProgressIndicator().centralized(),
                                       imageBuilder: (context, imageProvider) =>
-                                        Image(
-                                          image: imageProvider,
-                                          height: 148,
-                                          width: context.getWidth(),
-                                          fit: BoxFit.cover,
-                                      ),
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(14),
+                                          child: Image(
+                                            image: imageProvider,
+                                            height: 148,
+                                            width: context.getWidth(),
+                                            fit: BoxFit.cover,
+                                                                                ),
+                                        ),
                                     ),
                                   ),
                                 ),

@@ -23,6 +23,7 @@ mixin _$TicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -38,6 +39,7 @@ mixin _$TicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -53,6 +55,7 @@ mixin _$TicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -69,6 +72,7 @@ mixin _$TicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -81,6 +85,7 @@ mixin _$TicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -93,6 +98,7 @@ mixin _$TicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,
@@ -162,6 +168,7 @@ class _$InitialTicketStateImpl implements InitialTicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -180,6 +187,7 @@ class _$InitialTicketStateImpl implements InitialTicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -198,6 +206,7 @@ class _$InitialTicketStateImpl implements InitialTicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -220,6 +229,7 @@ class _$InitialTicketStateImpl implements InitialTicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -235,6 +245,7 @@ class _$InitialTicketStateImpl implements InitialTicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -250,6 +261,7 @@ class _$InitialTicketStateImpl implements InitialTicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,
@@ -309,6 +321,7 @@ class _$LoadingTicketStateImpl implements LoadingTicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -327,6 +340,7 @@ class _$LoadingTicketStateImpl implements LoadingTicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -345,6 +359,7 @@ class _$LoadingTicketStateImpl implements LoadingTicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -367,6 +382,7 @@ class _$LoadingTicketStateImpl implements LoadingTicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -382,6 +398,7 @@ class _$LoadingTicketStateImpl implements LoadingTicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -397,6 +414,7 @@ class _$LoadingTicketStateImpl implements LoadingTicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,
@@ -456,6 +474,7 @@ class _$HaveTicketStateImpl implements HaveTicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -474,6 +493,7 @@ class _$HaveTicketStateImpl implements HaveTicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -492,6 +512,7 @@ class _$HaveTicketStateImpl implements HaveTicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -514,6 +535,7 @@ class _$HaveTicketStateImpl implements HaveTicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -529,6 +551,7 @@ class _$HaveTicketStateImpl implements HaveTicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -544,6 +567,7 @@ class _$HaveTicketStateImpl implements HaveTicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,
@@ -603,6 +627,7 @@ class _$EmptyTicketStateImpl implements EmptyTicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -621,6 +646,7 @@ class _$EmptyTicketStateImpl implements EmptyTicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -639,6 +665,7 @@ class _$EmptyTicketStateImpl implements EmptyTicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -661,6 +688,7 @@ class _$EmptyTicketStateImpl implements EmptyTicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -676,6 +704,7 @@ class _$EmptyTicketStateImpl implements EmptyTicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -691,6 +720,7 @@ class _$EmptyTicketStateImpl implements EmptyTicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,
@@ -750,6 +780,7 @@ class _$SuccessTicketStateImpl implements SuccessTicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -768,6 +799,7 @@ class _$SuccessTicketStateImpl implements SuccessTicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -786,6 +818,7 @@ class _$SuccessTicketStateImpl implements SuccessTicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -808,6 +841,7 @@ class _$SuccessTicketStateImpl implements SuccessTicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -823,6 +857,7 @@ class _$SuccessTicketStateImpl implements SuccessTicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -838,6 +873,7 @@ class _$SuccessTicketStateImpl implements SuccessTicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,
@@ -852,6 +888,206 @@ class _$SuccessTicketStateImpl implements SuccessTicketState {
 
 abstract class SuccessTicketState implements TicketState {
   const factory SuccessTicketState() = _$SuccessTicketStateImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadedTicketStateImplCopyWith<$Res> {
+  factory _$$LoadedTicketStateImplCopyWith(_$LoadedTicketStateImpl value,
+          $Res Function(_$LoadedTicketStateImpl) then) =
+      __$$LoadedTicketStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TicketDto? ticket});
+
+  $TicketDtoCopyWith<$Res>? get ticket;
+}
+
+/// @nodoc
+class __$$LoadedTicketStateImplCopyWithImpl<$Res>
+    extends _$TicketStateCopyWithImpl<$Res, _$LoadedTicketStateImpl>
+    implements _$$LoadedTicketStateImplCopyWith<$Res> {
+  __$$LoadedTicketStateImplCopyWithImpl(_$LoadedTicketStateImpl _value,
+      $Res Function(_$LoadedTicketStateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? ticket = freezed,
+  }) {
+    return _then(_$LoadedTicketStateImpl(
+      ticket: freezed == ticket
+          ? _value.ticket
+          : ticket // ignore: cast_nullable_to_non_nullable
+              as TicketDto?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TicketDtoCopyWith<$Res>? get ticket {
+    if (_value.ticket == null) {
+      return null;
+    }
+
+    return $TicketDtoCopyWith<$Res>(_value.ticket!, (value) {
+      return _then(_value.copyWith(ticket: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$LoadedTicketStateImpl implements LoadedTicketState {
+  const _$LoadedTicketStateImpl({required this.ticket});
+
+  @override
+  final TicketDto? ticket;
+
+  @override
+  String toString() {
+    return 'TicketState.ticketLoaded(ticket: $ticket)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadedTicketStateImpl &&
+            (identical(other.ticket, ticket) || other.ticket == ticket));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, ticket);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadedTicketStateImplCopyWith<_$LoadedTicketStateImpl> get copyWith =>
+      __$$LoadedTicketStateImplCopyWithImpl<_$LoadedTicketStateImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() haveTicket,
+    required TResult Function() empty,
+    required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
+    required TResult Function() deleted,
+    required TResult Function(
+            Object exception, StackTrace stackTrace, bool shouldPopPage)
+        error,
+    required TResult Function(dynamic Function() onTryAgain, bool shouldPopPage)
+        offline,
+  }) {
+    return ticketLoaded(ticket);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? haveTicket,
+    TResult? Function()? empty,
+    TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
+    TResult? Function()? deleted,
+    TResult? Function(
+            Object exception, StackTrace stackTrace, bool shouldPopPage)?
+        error,
+    TResult? Function(dynamic Function() onTryAgain, bool shouldPopPage)?
+        offline,
+  }) {
+    return ticketLoaded?.call(ticket);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? haveTicket,
+    TResult Function()? empty,
+    TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
+    TResult Function()? deleted,
+    TResult Function(
+            Object exception, StackTrace stackTrace, bool shouldPopPage)?
+        error,
+    TResult Function(dynamic Function() onTryAgain, bool shouldPopPage)?
+        offline,
+    required TResult orElse(),
+  }) {
+    if (ticketLoaded != null) {
+      return ticketLoaded(ticket);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialTicketState value) initial,
+    required TResult Function(LoadingTicketState value) loading,
+    required TResult Function(HaveTicketState value) haveTicket,
+    required TResult Function(EmptyTicketState value) empty,
+    required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
+    required TResult Function(DeletedTicketState value) deleted,
+    required TResult Function(ErrorTicketState value) error,
+    required TResult Function(OfflineTicketState value) offline,
+  }) {
+    return ticketLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialTicketState value)? initial,
+    TResult? Function(LoadingTicketState value)? loading,
+    TResult? Function(HaveTicketState value)? haveTicket,
+    TResult? Function(EmptyTicketState value)? empty,
+    TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
+    TResult? Function(DeletedTicketState value)? deleted,
+    TResult? Function(ErrorTicketState value)? error,
+    TResult? Function(OfflineTicketState value)? offline,
+  }) {
+    return ticketLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialTicketState value)? initial,
+    TResult Function(LoadingTicketState value)? loading,
+    TResult Function(HaveTicketState value)? haveTicket,
+    TResult Function(EmptyTicketState value)? empty,
+    TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
+    TResult Function(DeletedTicketState value)? deleted,
+    TResult Function(ErrorTicketState value)? error,
+    TResult Function(OfflineTicketState value)? offline,
+    required TResult orElse(),
+  }) {
+    if (ticketLoaded != null) {
+      return ticketLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadedTicketState implements TicketState {
+  const factory LoadedTicketState({required final TicketDto? ticket}) =
+      _$LoadedTicketStateImpl;
+
+  TicketDto? get ticket;
+  @JsonKey(ignore: true)
+  _$$LoadedTicketStateImplCopyWith<_$LoadedTicketStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -897,6 +1133,7 @@ class _$DeletedTicketStateImpl implements DeletedTicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -915,6 +1152,7 @@ class _$DeletedTicketStateImpl implements DeletedTicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -933,6 +1171,7 @@ class _$DeletedTicketStateImpl implements DeletedTicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -955,6 +1194,7 @@ class _$DeletedTicketStateImpl implements DeletedTicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -970,6 +1210,7 @@ class _$DeletedTicketStateImpl implements DeletedTicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -985,6 +1226,7 @@ class _$DeletedTicketStateImpl implements DeletedTicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,
@@ -1093,6 +1335,7 @@ class _$ErrorTicketStateImpl implements ErrorTicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -1111,6 +1354,7 @@ class _$ErrorTicketStateImpl implements ErrorTicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -1129,6 +1373,7 @@ class _$ErrorTicketStateImpl implements ErrorTicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -1151,6 +1396,7 @@ class _$ErrorTicketStateImpl implements ErrorTicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -1166,6 +1412,7 @@ class _$ErrorTicketStateImpl implements ErrorTicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -1181,6 +1428,7 @@ class _$ErrorTicketStateImpl implements ErrorTicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,
@@ -1288,6 +1536,7 @@ class _$OfflineTicketStateImpl implements OfflineTicketState {
     required TResult Function() haveTicket,
     required TResult Function() empty,
     required TResult Function() success,
+    required TResult Function(TicketDto? ticket) ticketLoaded,
     required TResult Function() deleted,
     required TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)
@@ -1306,6 +1555,7 @@ class _$OfflineTicketStateImpl implements OfflineTicketState {
     TResult? Function()? haveTicket,
     TResult? Function()? empty,
     TResult? Function()? success,
+    TResult? Function(TicketDto? ticket)? ticketLoaded,
     TResult? Function()? deleted,
     TResult? Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -1324,6 +1574,7 @@ class _$OfflineTicketStateImpl implements OfflineTicketState {
     TResult Function()? haveTicket,
     TResult Function()? empty,
     TResult Function()? success,
+    TResult Function(TicketDto? ticket)? ticketLoaded,
     TResult Function()? deleted,
     TResult Function(
             Object exception, StackTrace stackTrace, bool shouldPopPage)?
@@ -1346,6 +1597,7 @@ class _$OfflineTicketStateImpl implements OfflineTicketState {
     required TResult Function(HaveTicketState value) haveTicket,
     required TResult Function(EmptyTicketState value) empty,
     required TResult Function(SuccessTicketState value) success,
+    required TResult Function(LoadedTicketState value) ticketLoaded,
     required TResult Function(DeletedTicketState value) deleted,
     required TResult Function(ErrorTicketState value) error,
     required TResult Function(OfflineTicketState value) offline,
@@ -1361,6 +1613,7 @@ class _$OfflineTicketStateImpl implements OfflineTicketState {
     TResult? Function(HaveTicketState value)? haveTicket,
     TResult? Function(EmptyTicketState value)? empty,
     TResult? Function(SuccessTicketState value)? success,
+    TResult? Function(LoadedTicketState value)? ticketLoaded,
     TResult? Function(DeletedTicketState value)? deleted,
     TResult? Function(ErrorTicketState value)? error,
     TResult? Function(OfflineTicketState value)? offline,
@@ -1376,6 +1629,7 @@ class _$OfflineTicketStateImpl implements OfflineTicketState {
     TResult Function(HaveTicketState value)? haveTicket,
     TResult Function(EmptyTicketState value)? empty,
     TResult Function(SuccessTicketState value)? success,
+    TResult Function(LoadedTicketState value)? ticketLoaded,
     TResult Function(DeletedTicketState value)? deleted,
     TResult Function(ErrorTicketState value)? error,
     TResult Function(OfflineTicketState value)? offline,

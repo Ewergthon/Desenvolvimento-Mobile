@@ -11,6 +11,7 @@ import 'package:unithub/data/repository/ticket/ticket_repository.dart';
 import 'package:unithub/page/auth/login/cubit/login_cubit.dart';
 import 'package:unithub/page/auth/register/cubit/register_cubit.dart';
 import 'package:unithub/page/create_event/cubit/create_event_cubit.dart';
+import 'package:unithub/page/tabs/bookings/cubit/bookings_cubit.dart';
 import 'package:unithub/page/tabs/home/cubit/home_cubit.dart';
 import 'package:unithub/page/tabs/home/cubit/ticket/ticket_cubit.dart';
 import 'package:unithub/services/shared_preferences_service.dart';
@@ -34,6 +35,8 @@ Future<void> setUpInjections() async {
   eventI(firestore, storage, auth);
 
   homeI(firestore);
+
+  bookingI(firestore);
 
   ticketI(firestore, auth);
 }
@@ -73,4 +76,8 @@ void ticketI(FirebaseFirestore firestore, FirebaseAuth auth) {
 
 void homeI(FirebaseFirestore firestore) {
   i.registerFactory(() => HomeCubit(repository: i<EventRepository>(), ticketRepository: i<TicketRepository>()));
+}
+
+void bookingI(FirebaseFirestore firestore) {
+  i.registerFactory(() => BookingsCubit(repository: i<EventRepository>(), ticketRepository: i<TicketRepository>()));
 }
