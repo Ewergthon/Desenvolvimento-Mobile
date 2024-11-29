@@ -51,7 +51,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               _buildBottomNavigationBarItem(0, "assets/home.png", 'HOME'),
               _buildBottomNavigationBarItem(1, "assets/events.png", 'EVENTOS'),
               _buildBottomNavigationBarItem(2, "assets/bookings.png", 'RESERVAS'),
-              _buildBottomNavigationBarItem(3, "assets/messages.png", 'MENSAGENS'),
+              _buildBottomNavigationBarItem(3, "assets/messages.png", 'FÓRUM'),
             ],
           ),
         ),

@@ -22,6 +22,8 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) {
 mixin _$UserDto {
   @JsonKey(name: 'id')
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_admin')
+  bool get isAdmin => throw _privateConstructorUsedError;
   @JsonKey(name: 'profile_image')
   String get profileImage => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
@@ -41,6 +43,7 @@ abstract class $UserDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'is_admin') bool isAdmin,
       @JsonKey(name: 'profile_image') String profileImage,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'email') String email});
@@ -60,6 +63,7 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
   @override
   $Res call({
     Object? id = null,
+    Object? isAdmin = null,
     Object? profileImage = null,
     Object? name = null,
     Object? email = null,
@@ -69,6 +73,10 @@ class _$UserDtoCopyWithImpl<$Res, $Val extends UserDto>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
       profileImage: null == profileImage
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
@@ -94,6 +102,7 @@ abstract class _$$UserDtoImplCopyWith<$Res> implements $UserDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') String id,
+      @JsonKey(name: 'is_admin') bool isAdmin,
       @JsonKey(name: 'profile_image') String profileImage,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'email') String email});
@@ -111,6 +120,7 @@ class __$$UserDtoImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? isAdmin = null,
     Object? profileImage = null,
     Object? name = null,
     Object? email = null,
@@ -120,6 +130,10 @@ class __$$UserDtoImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
       profileImage: null == profileImage
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
@@ -142,6 +156,7 @@ class __$$UserDtoImplCopyWithImpl<$Res>
 class _$UserDtoImpl implements _UserDto {
   _$UserDtoImpl(
       {@JsonKey(name: 'id') this.id = '',
+      @JsonKey(name: 'is_admin') this.isAdmin = false,
       @JsonKey(name: 'profile_image') this.profileImage = '',
       @JsonKey(name: 'name') this.name = '',
       @JsonKey(name: 'email') this.email = ''});
@@ -152,6 +167,9 @@ class _$UserDtoImpl implements _UserDto {
   @override
   @JsonKey(name: 'id')
   final String id;
+  @override
+  @JsonKey(name: 'is_admin')
+  final bool isAdmin;
   @override
   @JsonKey(name: 'profile_image')
   final String profileImage;
@@ -164,7 +182,7 @@ class _$UserDtoImpl implements _UserDto {
 
   @override
   String toString() {
-    return 'UserDto(id: $id, profileImage: $profileImage, name: $name, email: $email)';
+    return 'UserDto(id: $id, isAdmin: $isAdmin, profileImage: $profileImage, name: $name, email: $email)';
   }
 
   @override
@@ -173,6 +191,7 @@ class _$UserDtoImpl implements _UserDto {
         (other.runtimeType == runtimeType &&
             other is _$UserDtoImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
             (identical(other.profileImage, profileImage) ||
                 other.profileImage == profileImage) &&
             (identical(other.name, name) || other.name == name) &&
@@ -181,7 +200,8 @@ class _$UserDtoImpl implements _UserDto {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, profileImage, name, email);
+  int get hashCode =>
+      Object.hash(runtimeType, id, isAdmin, profileImage, name, email);
 
   @JsonKey(ignore: true)
   @override
@@ -200,6 +220,7 @@ class _$UserDtoImpl implements _UserDto {
 abstract class _UserDto implements UserDto {
   factory _UserDto(
       {@JsonKey(name: 'id') final String id,
+      @JsonKey(name: 'is_admin') final bool isAdmin,
       @JsonKey(name: 'profile_image') final String profileImage,
       @JsonKey(name: 'name') final String name,
       @JsonKey(name: 'email') final String email}) = _$UserDtoImpl;
@@ -209,6 +230,9 @@ abstract class _UserDto implements UserDto {
   @override
   @JsonKey(name: 'id')
   String get id;
+  @override
+  @JsonKey(name: 'is_admin')
+  bool get isAdmin;
   @override
   @JsonKey(name: 'profile_image')
   String get profileImage;

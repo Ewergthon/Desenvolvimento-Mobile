@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:unithub/core/routes/app_routes.dart';
 import 'package:unithub/page/auth/login/login_page.dart';
 import 'package:unithub/page/auth/register/register_page.dart';
@@ -17,6 +18,7 @@ class UnithubApp extends StatelessWidget {
     return MaterialApp(
       title: 'UnitHub',
       debugShowCheckedModeBanner: false,
+      builder: FlutterSmartDialog.init(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

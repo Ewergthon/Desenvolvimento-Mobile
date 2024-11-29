@@ -32,15 +32,19 @@ class UserRepository {
   }
 
   Future<void> updateUser({
-    required String name,
+    String? name,
     String? profileImage,
   }) async {
     final userId = auth.currentUser!.uid;
 
     await firestore.collection("users").doc(userId).update({
-      "name": name,
+      if (name != null) "name": name,
       if (profileImage != null) "profile_image": profileImage!,
     });
+  }
+
+  Future<void> signOut() async {
+    await auth.signOut();
   }
 
   Future<void> deleteUser() async {

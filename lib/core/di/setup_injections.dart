@@ -6,14 +6,17 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unithub/data/repository/auth/login_repository.dart';
 import 'package:unithub/data/repository/auth/register_repository.dart';
+import 'package:unithub/data/repository/chat/chat_room.dart';
 import 'package:unithub/data/repository/event/event_repository.dart';
 import 'package:unithub/data/repository/ticket/ticket_repository.dart';
+import 'package:unithub/data/repository/user/user_repository.dart';
 import 'package:unithub/page/auth/login/cubit/login_cubit.dart';
 import 'package:unithub/page/auth/register/cubit/register_cubit.dart';
 import 'package:unithub/page/create_event/cubit/create_event_cubit.dart';
 import 'package:unithub/page/tabs/bookings/cubit/bookings_cubit.dart';
 import 'package:unithub/page/tabs/home/cubit/home_cubit.dart';
 import 'package:unithub/page/tabs/home/cubit/ticket/ticket_cubit.dart';
+import 'package:unithub/page/tabs/home/cubit/user/user_cubit.dart';
 import 'package:unithub/services/shared_preferences_service.dart';
 
 GetIt i = GetIt.instance;
@@ -39,6 +42,10 @@ Future<void> setUpInjections() async {
   bookingI(firestore);
 
   ticketI(firestore, auth);
+
+  userI(firestore, auth);
+
+  chatI(firestore, auth);
 }
 
 void registerI(FirebaseAuth auth, FirebaseFirestore firestore) {
@@ -74,10 +81,20 @@ void ticketI(FirebaseFirestore firestore, FirebaseAuth auth) {
   i.registerFactory(() => TicketCubit(repository: i<TicketRepository>(), eventRepository: i<EventRepository>()));
 }
 
+void userI(FirebaseFirestore firestore, FirebaseAuth auth) {
+  i.registerLazySingleton(() => UserRepository(auth, firestore));
+
+  i.registerFactory(() => UserCubit(repository: i<UserRepository>()));
+}
+
 void homeI(FirebaseFirestore firestore) {
   i.registerFactory(() => HomeCubit(repository: i<EventRepository>(), ticketRepository: i<TicketRepository>()));
 }
 
 void bookingI(FirebaseFirestore firestore) {
   i.registerFactory(() => BookingsCubit(repository: i<EventRepository>(), ticketRepository: i<TicketRepository>()));
+}
+
+void chatI(FirebaseFirestore firestore, FirebaseAuth auth) {
+  i.registerFactory(() => ChatRoom(firestore: firestore, auth: auth));
 }
